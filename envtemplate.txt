@@ -1,0 +1,18 @@
+# This is a template used to create environment files for beluga
+# docker-compose. Copy this file to .env and edit
+
+# Domain used to call services. Defaults to .ed, don't change unless you know what you are doing.
+#DOMAIN=.ed
+
+# IP address of the beluga host system. Automatically determined if on interface eth1, enp0s3, or eth0
+#IP_ADDR=192.168.0.33
+
+# List of apps to enable. Example includes all current apps, remove unwanted apps.
+MODULES="hello npm-offline"
+
+# OFFLINE is set to prevent image builds (which will fail offline), and also to
+# set various app configurations into offline mode.
+#OFFLINE=1
+
+# Consult the envtemplate.txt files for each enabled app, also
+# copy their contents into .env and set appropriate values.

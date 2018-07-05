@@ -1,5 +1,0 @@
-# This is a template used to create environment files for beluga
-# docker-compose. Copy this file to .env and edit
-
-DOMAIN=.ed
-IP_ADDR=192.168.0.33
