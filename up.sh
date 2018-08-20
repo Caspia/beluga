@@ -2,6 +2,9 @@
 
 # script file to start base beluga services and supported apps.
 
+# kill and remove any previous containers
+. ./down.sh
+
 # start base services. This also loads environment variables from .env
 . ./up-base.sh
 

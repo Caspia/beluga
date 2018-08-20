@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Try to locate the IP address if not set in environment variables
+
+. ./get-ippaddr.sh
+
+echo "IP address is $IP_ADDR"
+
 # load environment variables from .env
 . .env
 

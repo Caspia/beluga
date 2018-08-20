@@ -16,3 +16,6 @@ MODULES="hello npm-offline"
 
 # Consult the envtemplate.txt files for each enabled app, also
 # copy their contents into .env and set appropriate values.
+
+# An extra command for dnsmasq. Used by offlineweb to extend IP address to include all hosts.
+DNSMASQ_EXTRA=""
