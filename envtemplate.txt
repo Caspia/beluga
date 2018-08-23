@@ -19,3 +19,7 @@ MODULES="hello npm-offline"
 
 # An extra command for dnsmasq. Used by offlineweb to extend IP address to include all hosts.
 DNSMASQ_EXTRA=""
+
+# By default, nginx-proxy is the web handler. But this can be overridden, typically
+# by offlineweb
+WEBHANDLER="nginx-proxy"
