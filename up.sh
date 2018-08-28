@@ -16,6 +16,6 @@ export OFFLINE=$OFFLINE
 for module in $MODULES; do
   echo "Starting app $module"
   cd ../$module
-  ./up.sh
+  . ./up.sh
   cd - > /dev/null
 done
