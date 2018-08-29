@@ -33,7 +33,7 @@ fi
 if [ -z "$OFFLINE" ]; then
   docker build -t caspia/dnsmasq:alpine ./dnsmasq
 fi
-docker run -p 53:53/tcp -p 53:53/udp -d \
+docker run -p ${IP_ADDR}:53:53/tcp -p ${IP_ADDR}:53:53/udp -d \
  --network="beluga" --ip="172.20.0.101" \
  --restart=always --cap-add NET_ADMIN \
  --name dnsmasq caspia/dnsmasq:alpine "-A" "/${DOMAIN}/${IP_ADDR}" "${DNSMASQ_EXTRA}"
