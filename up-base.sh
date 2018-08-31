@@ -2,6 +2,10 @@
 
 # script file to start base beluga containers.
 
+echo ""
+echo "== base beluga modules (nginx-proxy and dnsmasq) going up"
+echo ""
+
 echo "IP_ADDR is ${IP_ADDR}"
 echo "DNSMASQ_EXTRA is ${DNSMASQ_EXTRA}"
 
@@ -23,16 +27,14 @@ export DOMAIN=$DOMAIN
 # nginx-proxy: maps url names to specific docker containers
 # Only install if this is the webhandler
 if [ -z "$WEBHANDLER" ] || [ "$WEBHANDLER" == "${nginx-proxy}" ]; then
+  docker container rm --force nginx-proxy 2>/dev/null
   docker run -d -p 80:80 --ip="172.20.0.102" \
     -v /var/run/docker.sock:/tmp/docker.sock:ro \
     --name nginx-proxy --network="beluga" \
     --restart=always jwilder/nginx-proxy:alpine
 fi
 
-# dnsmasq: DNS server returning the base IP address for any address in a domain.
-if [ -z "$OFFLINE" ]; then
-  docker build -t caspia/dnsmasq:alpine ./dnsmasq
-fi
+docker container rm --force nginx-proxy 2>/dev/null
 docker run -p ${IP_ADDR}:53:53/tcp -p ${IP_ADDR}:53:53/udp -d \
  --network="beluga" --ip="172.20.0.101" \
  --restart=always --cap-add NET_ADMIN \
