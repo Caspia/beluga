@@ -34,7 +34,7 @@ if [ -z "$WEBHANDLER" ] || [ "$WEBHANDLER" == "${nginx-proxy}" ]; then
     --restart=always jwilder/nginx-proxy:alpine
 fi
 
-docker container rm --force nginx-proxy 2>/dev/null
+docker container rm --force dnsmasq 2>/dev/null
 docker run -p ${IP_ADDR}:53:53/tcp -p ${IP_ADDR}:53:53/udp -d \
  --network="beluga" --ip="172.20.0.101" \
  --restart=always --cap-add NET_ADMIN \

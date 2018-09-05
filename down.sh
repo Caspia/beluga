@@ -11,7 +11,7 @@ export BELUGA="1"
 export OFFLINE=$OFFLINE
 
 for module in $MODULES; do
-  echo "Stopping app $module"
+  echo "Stopping container $module"
   cd ../$module
   ./down.sh
   cd - > /dev/null
