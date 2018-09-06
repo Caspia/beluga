@@ -6,7 +6,7 @@
 
 echo "IP address is $IP_ADDR"
 
-# load environment variables from .env
+# load beluga environment variables from .env
 . .env
 
 BASEMODULES='nginx-proxy dnsmasq'

@@ -24,14 +24,32 @@ fi
 echo "DOMAIN is $DOMAIN"
 export DOMAIN=$DOMAIN
 
+# load .env files from each module
+for module in $MODULES; do
+  echo "Loading environment variables from $module"
+  cd ../$module
+  if [ -f ".env" ]
+  then
+    . .env
+  else
+    . .env-template.sh
+  fi
+  cd - > /dev/null
+done
+
 # nginx-proxy: maps url names to specific docker containers
 # Only install if this is the webhandler
-if [ -z "$WEBHANDLER" ] || [ "$WEBHANDLER" == "${nginx-proxy}" ]; then
+echo "WEBHANDLER is ${WEBHANDLER}"
+if [ -z "$WEBHANDLER" ] || [ "$WEBHANDLER" == "nginx-proxy" ]
+then
+  echo "Using nginx-proxy as web handler"
   docker container rm --force nginx-proxy 2>/dev/null
   docker run -d -p 80:80 --ip="172.20.0.102" \
     -v /var/run/docker.sock:/tmp/docker.sock:ro \
     --name nginx-proxy --network="beluga" \
     --restart=always jwilder/nginx-proxy:alpine
+else
+  echo "Not using nginx-proxy as web handler"
 fi
 
 docker container rm --force dnsmasq 2>/dev/null
