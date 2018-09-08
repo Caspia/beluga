@@ -6,9 +6,6 @@ echo ""
 echo "== base beluga modules (nginx-proxy and dnsmasq) going up"
 echo ""
 
-echo "IP_ADDR is ${IP_ADDR}"
-echo "DNSMASQ_EXTRA is ${DNSMASQ_EXTRA}"
-
 # remove and recreate the beluga network
 docker network rm beluga 2> /dev/null
 docker network create \
@@ -16,13 +13,6 @@ docker network create \
   --ip-range=172.20.1.0/24 \
   -o "com.docker.network.bridge.enable_icc=true" \
   beluga
-
-# default for DOMAIN is .ed"
-if [ "$DOMAIN" == "" ]; then
-  DOMAIN=".ed"
-fi
-echo "DOMAIN is $DOMAIN"
-export DOMAIN=$DOMAIN
 
 # load .env files from each module
 for module in $MODULES; do
@@ -36,6 +26,18 @@ for module in $MODULES; do
   fi
   cd - > /dev/null
 done
+
+#
+# fixup and reporting of some global configuration variables
+#
+echo "IP_ADDR is ${IP_ADDR}"
+echo "DNSMASQ_EXTRA is ${DNSMASQ_EXTRA}"
+# default for DOMAIN is .ed"
+if [ "$DOMAIN" == "" ]; then
+  DOMAIN=".ed"
+fi
+echo "DOMAIN is $DOMAIN"
+export DOMAIN=$DOMAIN
 
 # nginx-proxy: maps url names to specific docker containers
 # Only install if this is the webhandler

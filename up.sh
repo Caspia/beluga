@@ -5,7 +5,7 @@
 # kill and remove any previous containers
 . ./down.sh
 
-# start base services. This also loads environment variables from .env
+# start base services. This also loads module environment variables from .env
 . ./up-base.sh
 
 # loop through enabled services and start

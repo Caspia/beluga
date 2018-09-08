@@ -2,7 +2,7 @@
 
 # script file to stop base beluga services and supported apps.
 
-# start base services. This also loads environment variables from .env
+# start base services. This also loads beluga environment variables from .env
 . ./down-base.sh
 
 # loop through enabled services and stop
